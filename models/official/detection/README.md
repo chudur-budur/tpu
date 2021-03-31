@@ -17,11 +17,11 @@ It also features latest research including
 
 ## Updates
 * **May 3, 2020: Update inference latency on V100/P100 GPUs for RetinaNet models in
-[MODEL_ZOO.md](https://github.com/tensorflow/tpu/blob/master/models/official/detection/MODEL_ZOO.md).**
+[MODEL_ZOO.md](https://github.com/chudur-budur/tpu/blob/master/models/official/detection/MODEL_ZOO.md).**
 * April 10, 2020: Launch the new
-[README.md](https://github.com/tensorflow/tpu/blob/master/models/official/detection/README.md),
-[GETTING_STARTED.md](https://github.com/tensorflow/tpu/blob/master/models/official/detection/GETTING_STARTED.md), and
-[MODEL_ZOO.md](https://github.com/tensorflow/tpu/blob/master/models/official/detection/MODEL_ZOO.md).
+[README.md](https://github.com/chudur-budur/tpu/blob/master/models/official/detection/README.md),
+[GETTING_STARTED.md](https://github.com/chudur-budur/tpu/blob/master/models/official/detection/GETTING_STARTED.md), and
+[MODEL_ZOO.md](https://github.com/chudur-budur/tpu/blob/master/models/official/detection/MODEL_ZOO.md).
 Release initial models.
 
 ## Major Features
@@ -50,10 +50,10 @@ Release initial models.
 
 ## Model Zoo
 
-[MODEL_ZOO.md](https://github.com/tensorflow/tpu/blob/master/models/official/detection/MODEL_ZOO.md)
+[MODEL_ZOO.md](https://github.com/chudur-budur/tpu/blob/master/models/official/detection/MODEL_ZOO.md)
 provides a large collection of baselines and checkpoints for object detection, instance segmentation, and image classification.
 
 
 ## Get started
 
-Please follow the instructions in [GETTING_STARTED.md](https://github.com/tensorflow/tpu/blob/master/models/official/detection/GETTING_STARTED.md).
+Please follow the instructions in [GETTING_STARTED.md](https://github.com/chudur-budur/tpu/blob/master/models/official/detection/GETTING_STARTED.md).
