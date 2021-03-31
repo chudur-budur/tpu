@@ -49,7 +49,7 @@ Tools and scripts are provided to download and convert datasets.
 TPU might not be able to [use your local file system](https://cloud.google.com/tpu/docs/troubleshooting#cannot_use_local_filesystem). Therefore, all the `TFRecords` data need to be kept on google cloud storage. In our case, we have organized the data as follows:
 
 ```
-$ROOT_BUCKET
+$GS_ROOT_BUCKET
     +\mscoco
         +\coco2017
             + \annotations
@@ -65,10 +65,10 @@ $ROOT_BUCKET
 We have trained Mask-RCNN with Spinenet-49 backbone (`v3-8` can't train Spinenet-190). Had to keep the `train_batch_size: 64` (256 was not possible). Each step will take 2 sec. to compute, therefore completing 162050 steps will take 90 hours to finish. We have run the training for 16700 steps and found 18% AP. The train command is like this:
 
 ```
-TPU_NAME="<TPU Name>"
-DATA_ROOT="<bucket root>/mscoco/coco2017"
+TPU_NAME="$TPU_NAME"
+DATA_ROOT="$GS_ROOT_BUCKET/mscoco/coco2017"
 PROJECT_ROOT="$HOME/tpu/models"
-MODEL_ROOT="<bucket root>/$USER/trained-models/spinenet49_mrcnn_bs64"
+MODEL_ROOT="$GS_ROOT_BUCKET/$USER/trained-models/spinenet49_mrcnn_bs64"
 TRAIN_FILE_PATTERN="$DATA_ROOT/train/train-*"
 EVAL_FILE_PATTERN="$DATA_ROOT/val/val-*"
 VAL_JSON_FILE="$DATA_ROOT/annotations/instances_val2017.json"
