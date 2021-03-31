@@ -21,7 +21,7 @@ pip3 install --user Cython matplotlib opencv-python-headless pyyaml Pillow && \
 pip3 install --user 'git+https://github.com/cocodataset/cocoapi#egg=pycocotools&subdirectory=PythonAPI'
 ```
 
-**Please note: we didn't run any models from this code-base on GPU.
+***Please note: we didn't run any models from this code-base on GPU.**
 
 ## Dataset download and convesion
 
