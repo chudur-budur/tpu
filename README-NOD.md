@@ -62,7 +62,7 @@ $GS_ROOT_BUCKET
 
 ## Model Training
 
-We have trained Masked-R-CNN with Spinenet-49 backbone (`v3-8` can't train Spinenet-190). Had to keep the `train_batch_size: 64` (256 was not possible, because of resource exhaustion). Each step will take 2 sec. to compute, therefore completing 162050 steps will take 90 hours to finish. We have run the training for 16700 steps (i.e. 1/10-th of the total steps) and found 18% AP. The train command looks like this ([it's here](https://github.com/chudur-budur/tpu/blob/master/sh/train.sh)):
+We have trained Masked-R-CNN with Spinenet-49 backbone (`v3-8` can't train Spinenet-190). Had to keep the `train_batch_size: 64` (256 was not possible, because of resource exhaustion). Each step will take 2 sec. to compute, therefore completing 162050 steps will take 90 hours to finish. We have run the training for 16700 steps (i.e. 1/10-th of the total steps) and found 18% AP. The train command looks like this ([`train.sh`](https://github.com/chudur-budur/tpu/blob/master/sh/train.sh)):
 
 ```
 TPU_NAME="$TPU_NAME"
@@ -91,7 +91,28 @@ The config `.yaml` file for this experiment can be found [here](https://github.c
 
 ## Model Evaluation
 
-We have done evaluation on the 16700-th checkpoint. Which can be found at `gs://$GS_ROOT_BUCKET/$USER/trained-models/spinenet49_mrcnn_bs64/`.
+We have done evaluation on the 16700-th checkpoint. Which can be found at `gs://$GS_ROOT_BUCKET/$USER/trained-models/spinenet49_mrcnn_bs64/`. The command looks like this:
+
+```
+TPU_NAME="$TPU_NAME"
+DATA_ROOT="$GS_ROOT_BUCKET/mscoco/coco2017"
+PROJECT_ROOT="$HOME/tpu/models"
+MODEL_ROOT="$GS_ROOT_BUCKET/$USER/trained-models/spinenet49_mrcnn_bs64"
+TRAIN_FILE_PATTERN="$DATA_ROOT/train/train-*"
+EVAL_FILE_PATTERN="$DATA_ROOT/val/val-*"
+VAL_JSON_FILE="$DATA_ROOT/annotations/instances_val2017.json"
+# MODEL_CHECKPOINT="$MODEL_ROOT/model.ckpt-17600"
+PYTHONPATH="$PYTHONPATH:$PROJECT_ROOT:$PROJECT_ROOT/official/efficientnet" \
+    python $PROJECT_ROOT/official/detection/main.py \
+        --use_tpu=True \
+        --tpu="${TPU_NAME?}" \
+        --num_cores=8 \
+        --model=mask_rcnn \
+        --mode=eval \
+        --model_dir="${MODEL_ROOT?}" \
+        --config_file="${PROJECT_ROOT?}/official/detection/configs/spinenet/spinenet49_mrcnn.yaml" \
+        --params_override="{ eval: { val_json_file: ${VAL_JSON_FILE?}, eval_file_pattern: ${EVAL_FILE_PATTERN?} } }"
+```
 
 ## Model Training (Misc.)
 
