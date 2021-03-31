@@ -21,5 +21,5 @@ To run models in the `models` subdirectory, you may need to add the top-level
 export PYTHONPATH="$PYTHONPATH:/path/to/models"
 ```
 
-## Running/Training Models for Instance Segmentation and Detection
+## [Running/Training Models for Instance Segmentation and Detection](https://github.com/chudur-budur/tpu/blob/master/README-NOD.md)
 
