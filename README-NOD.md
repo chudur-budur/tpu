@@ -62,7 +62,7 @@ $GS_ROOT_BUCKET
 
 ## Model Training
 
-We have trained Masked-R-CNN with Spinenet-49 backbone (`v3-8` can't train Spinenet-190). Had to keep the `train_batch_size: 64` (256 was not possible, because of resource exhaustion). Each step will take 2 sec. to compute, therefore completing 162050 steps will take 90 hours to finish. We have run the training for 16700 steps and found 18% AP. The train command looks like this ([it's here](https://github.com/chudur-budur/tpu/blob/master/sh/train.sh)):
+We have trained Masked-R-CNN with Spinenet-49 backbone (`v3-8` can't train Spinenet-190). Had to keep the `train_batch_size: 64` (256 was not possible, because of resource exhaustion). Each step will take 2 sec. to compute, therefore completing 162050 steps will take 90 hours to finish. We have run the training for 16700 steps (i.e. 1/10-th of the total steps) and found 18% AP. The train command looks like this ([it's here](https://github.com/chudur-budur/tpu/blob/master/sh/train.sh)):
 
 ```
 TPU_NAME="$TPU_NAME"
@@ -88,6 +88,10 @@ PYTHONPATH="$PYTHONPATH:$PROJECT_ROOT:$PROJECT_ROOT/official/efficientnet" \
 ``` 
 
 The config `.yaml` file for this experiment can be found [here](https://github.com/chudur-budur/tpu/blob/master/models/official/detection/configs/spinenet/spinenet49_mrcnn.yaml).
+
+## Model Evaluation
+
+We have done evaluation on the 16700-th checkpoint. Which can be found [here](gs://$GS_ROOT_BUCKET/$USER/trained-models/spinenet49_mrcnn_bs64/).
 
 ## Model Training (Misc.)
 
