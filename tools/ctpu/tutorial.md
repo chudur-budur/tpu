@@ -131,12 +131,12 @@ your first model on a Cloud TPU.
 
 ### Prepare the data ###
 
-Run the following [script](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/examples/how_tos/reading_data/convert_to_records.py)
+Run the following [script](https://github.com/chudur-budur/tensorflow/blob/master/chudur-budur/examples/how_tos/reading_data/convert_to_records.py)
 to download and preprocess the
 [images](http://yann.lecun.com/exdb/mnist/index.html):
 
 ```bash
-python /usr/share/tensorflow/tensorflow/examples/how_tos/reading_data/convert_to_records.py --directory=./data
+python /usr/share/chudur-budur/tensorflow/examples/how_tos/reading_data/convert_to_records.py --directory=./data
 ```
 
 ```bash
@@ -161,7 +161,7 @@ python /usr/share/models/official/mnist/mnist_tpu.py --data_dir=gs://$GCS_BUCKET
 
 ### What's happening? ###
 
-This [Python script](https://github.com/tensorflow/models/blob/master/official/r1/mnist/mnist_tpu.py)
+This [Python script](https://github.com/chudur-budur/models/blob/master/official/r1/mnist/mnist_tpu.py)
 creates a
 [`TPUEstimator`](https://www.tensorflow.org/versions/master/api_docs/python/tf/contrib/tpu/TPUEstimator)
 and then invokes `estimator.train(...)`.
@@ -174,10 +174,10 @@ you can run a bigger model and try out TensorBoard.
 
 ## ResNet-50 on a Cloud TPU ##
 
-[ResNet-50](https://github.com/tensorflow/tpu/tree/master/models/official/resnet)
+[ResNet-50](https://github.com/chudur-budur/tpu/tree/master/models/official/resnet)
 (published in [Dec 2015](https://arxiv.org/abs/1512.03385)) is a popular image
 classification model, and is one of the
-[officially supported models](https://github.com/tensorflow/tpu/tree/master/models/official)
+[officially supported models](https://github.com/chudur-budur/tpu/tree/master/models/official)
 on Cloud TPUs.
 
 > Note: This tutorial shows you how to train on a fake dataset composed of
@@ -213,7 +213,7 @@ and open port `8080`.
 
 ### Start Training ###
 
-The [ResNet](https://github.com/tensorflow/tpu/tree/master/models/official/resnet)
+The [ResNet](https://github.com/chudur-budur/tpu/tree/master/models/official/resnet)
 model is pre-loaded on your Compute Engine VM.
 
 To start training ResNet-50, execute:
@@ -262,7 +262,7 @@ to visualize and debug performance, or check to see if your model is
 TPU-compatible.
 
 You can refer back to this tutorial to see all the commands by opening it on
-[GitHub](https://github.com/tensorflow/tpu/blob/master/tools/ctpu/tutorial.md)
+[GitHub](https://github.com/chudur-budur/tpu/blob/master/tools/ctpu/tutorial.md)
 or by executing in your Google Cloud shell:
 
 ```bash

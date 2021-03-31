@@ -33,7 +33,7 @@ If you do not have ImageNet dataset prepared, you can use a randomly generated
 fake dataset to test the model. It is located at
 `gs://cloud-tpu-test-datasets/fake_imagenet`.
 
-[imagenet-download-format-as-tfrecord]: https://github.com/tensorflow/tpu/blob/master/tools/datasets/imagenet_to_gcs.py
+[imagenet-download-format-as-tfrecord]: https://github.com/chudur-budur/tpu/blob/master/tools/datasets/imagenet_to_gcs.py
 
 ## Training the model
 
@@ -254,7 +254,7 @@ It is recommended to use TFRecord format for storing your data on disk and
 `tf.data.Dataset` for the actual pipeline. Then, pass in the dataset
 constants as command-line parameters to resnet_main.py.
 
-[jpeg_to_tfrecord]: https://github.com/tensorflow/tpu/blob/master/tools/datasets/jpeg_to_tf_record.py
+[jpeg_to_tfrecord]: https://github.com/chudur-budur/tpu/blob/master/tools/datasets/jpeg_to_tf_record.py
 
 
 ### Benchmarking the training speed

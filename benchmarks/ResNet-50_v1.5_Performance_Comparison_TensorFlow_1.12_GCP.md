@@ -18,9 +18,9 @@ ResNet-50 v1.5 is almost the same model architecture described by He, et. al. in
 
 ### Implementation Details
 
-We use the [tf_cnn_benchmarks implementation](https://github.com/tensorflow/benchmarks/tree/master/scripts/tf_cnn_benchmarks) of ResNet-50 v1.5 training for the GPU benchmark. This version of ResNet-50 utilizes [mixed-precision](https://docs.nvidia.com/deeplearning/sdk/mixed-precision-training/index.html#mptrain) FP16 to maximize the utilization of Tensor Cores on the NVIDIA Tesla V100. [XLA](https://www.tensorflow.org/xla/) was used to optimize the graph for GPU execution to further improve the performance of the V100 GPUs.
+We use the [tf_cnn_benchmarks implementation](https://github.com/chudur-budur/benchmarks/tree/master/scripts/tf_cnn_benchmarks) of ResNet-50 v1.5 training for the GPU benchmark. This version of ResNet-50 utilizes [mixed-precision](https://docs.nvidia.com/deeplearning/sdk/mixed-precision-training/index.html#mptrain) FP16 to maximize the utilization of Tensor Cores on the NVIDIA Tesla V100. [XLA](https://www.tensorflow.org/xla/) was used to optimize the graph for GPU execution to further improve the performance of the V100 GPUs.
 
-We use the [standard Cloud TPU reference model](https://github.com/tensorflow/tpu/tree/r1.12/models/official/resnet) implementation of ResNet-50 v1.5 for Cloud TPU Pods. This implementation includes minor optimizations specific to TPUs (including using bfloat16 numerics on more variables, and transposing NCHW-formatted data to NHWC before sending it to the TPU for better performance).
+We use the [standard Cloud TPU reference model](https://github.com/chudur-budur/tpu/tree/r1.12/models/official/resnet) implementation of ResNet-50 v1.5 for Cloud TPU Pods. This implementation includes minor optimizations specific to TPUs (including using bfloat16 numerics on more variables, and transposing NCHW-formatted data to NHWC before sending it to the TPU for better performance).
 
 A variety of alternative ResNet-50 training protocols have recently emerged that can accelerate convergence by reducing the amount of computation required for training. For example, progressively scaling up image sizes as training progresses and setting more aggressive learning rate schedules empirically lead to faster convergence on ImageNet. However, for the purposes of this benchmark comparison, we have chosen to stick with the most standard ResNet-50 training protocol, and we hold the amount of computation fixed and then compare the performance of different systems as they carry out the same logical operations.
 
@@ -56,7 +56,7 @@ Instructions for generating the ImageNet image set.  These instructions result i
 
 1. Sign up for the ImageNet image database (image-net.org) and obtain a username and access key to download the training and evaluation data.
 
-2. Utilize instructions for the [imagenet_to_gcs.py](https://github.com/tensorflow/tpu/blob/master/tools/datasets/imagenet_to_gcs.py) tool to process the data and upload it to a [Google Storage Bucket](https://cloud.google.com/storage/docs/creating-buckets).
+2. Utilize instructions for the [imagenet_to_gcs.py](https://github.com/chudur-budur/tpu/blob/master/tools/datasets/imagenet_to_gcs.py) tool to process the data and upload it to a [Google Storage Bucket](https://cloud.google.com/storage/docs/creating-buckets).
 
 #### VM Sizes for V100 GPUs on GCP
 
@@ -316,7 +316,7 @@ python read_training_time.py --model_dir=$HOME/test00/  \
 
 2. Sign up for the ImageNet image database (image-net.org) and obtain a username and access key to download the training and evaluation data. 
 
-3. Run the [imagenet_to_gcs.py](https://github.com/tensorflow/tpu/blob/master/tools/datasets/imagenet_to_gcs.py) on a GCE VM or your local desktop to download, process, and re-upload the data into your GCS bucket.
+3. Run the [imagenet_to_gcs.py](https://github.com/chudur-budur/tpu/blob/master/tools/datasets/imagenet_to_gcs.py) on a GCE VM or your local desktop to download, process, and re-upload the data into your GCS bucket.
 
 #### VM Size for Cloud TPUs on GCP
 

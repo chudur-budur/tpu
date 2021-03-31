@@ -71,9 +71,9 @@ We have provided a list of EfficientNet checkpoints:.
 | Acc. from paper        |  76.3%   | 78.8% | 79.8% | 81.1% | 82.6% | 83.3% |
 -->
 
-<sup>*To train EfficientNets with AutoAugment ([code](https://github.com/tensorflow/tpu/blob/master/models/official/efficientnet/autoaugment.py)), simply add option "--augment_name=autoaugment". If you use these checkpoints, you can cite this [paper](https://arxiv.org/abs/1805.09501).</sup>
+<sup>*To train EfficientNets with AutoAugment ([code](https://github.com/chudur-budur/tpu/blob/master/models/official/efficientnet/autoaugment.py)), simply add option "--augment_name=autoaugment". If you use these checkpoints, you can cite this [paper](https://arxiv.org/abs/1805.09501).</sup>
 
-<sup>**To train EfficientNets with RandAugment ([code](https://github.com/tensorflow/tpu/blob/master/models/official/efficientnet/autoaugment.py)), simply add option "--augment_name=randaugment". For EfficientNet-B5 also add "--randaug_num_layers=2 --randaug_magnitude=17". For EfficientNet-B7 or EfficientNet-B8 also add "--randaug_num_layers=2 --randaug_magnitude=28". If you use these checkpoints, you can cite this [paper](https://arxiv.org/abs/1909.13719).</sup>
+<sup>**To train EfficientNets with RandAugment ([code](https://github.com/chudur-budur/tpu/blob/master/models/official/efficientnet/autoaugment.py)), simply add option "--augment_name=randaugment". For EfficientNet-B5 also add "--randaug_num_layers=2 --randaug_magnitude=17". For EfficientNet-B7 or EfficientNet-B8 also add "--randaug_num_layers=2 --randaug_magnitude=28". If you use these checkpoints, you can cite this [paper](https://arxiv.org/abs/1909.13719).</sup>
 
 <sup>* AdvProp training code coming soon. Please set "--advprop_preprocessing=True" for using AdvProp checkpoints.  If you use AdvProp checkpoints, you can cite this [paper](https://arxiv.org/abs/1911.09665).</sup>
 
