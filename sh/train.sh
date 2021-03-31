@@ -1,7 +1,11 @@
+#/bin/bash
+# A script to train Masked-R-CNN with Spinenet-49 backbone on nod GCP TPU.
+# $./train.sh
+
 TPU_NAME="nod-v38-00"
 DATA_ROOT="gs://noddata/mscoco/coco2017"
 PROJECT_ROOT="$HOME/tpu/models"
-MODEL_ROOT="gs://noddata/${USER?}/trained-models/spinenet49_mrcnn_bs64"
+MODEL_ROOT="gs://noddata/$USER/trained-models/spinenet49_mrcnn_bs64"
 TRAIN_FILE_PATTERN="$DATA_ROOT/train/train-*"
 EVAL_FILE_PATTERN="$DATA_ROOT/val/val-*"
 VAL_JSON_FILE="$DATA_ROOT/annotations/instances_val2017.json"
