@@ -10,8 +10,6 @@ To get started, make sure you install Tensorflow 1.15+.
 pip3 install tensorflow-gpu==1.15  # GPU
 ```
 
-**Please note: we didn't run any models from this code-base on GPU.
-
 * For Cloud TPU / TPU Pods training, make sure Tensorflow 1.15+ is pre-installed in your Google Cloud VM.
 
 
@@ -22,6 +20,8 @@ sudo apt-get install -y python-tk && \
 pip3 install --user Cython matplotlib opencv-python-headless pyyaml Pillow && \
 pip3 install --user 'git+https://github.com/cocodataset/cocoapi#egg=pycocotools&subdirectory=PythonAPI'
 ```
+
+**Please note: we didn't run any models from this code-base on GPU.
 
 ## Dataset download and convesion
 
