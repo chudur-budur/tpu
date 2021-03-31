@@ -21,9 +21,9 @@ pip3 install --user Cython matplotlib opencv-python-headless pyyaml Pillow && \
 pip3 install --user 'git+https://github.com/cocodataset/cocoapi#egg=pycocotools&subdirectory=PythonAPI'
 ```
 
-***Please note: we didn't run any models from this code-base on GPU.**
+**Please note: we didn't run any models from this code-base on GPU.**
 
-## Dataset download and convesion
+## Dataset download and conversion
 
 Next, download the latest code from [tpu github](https://github.com/tensorflow/tpu) repository.
 
@@ -39,8 +39,21 @@ Tools and scripts are provided to download and convert datasets.
 | ImageNet  | [instructions](https://cloud.google.com/tpu/docs/classification-data-conversion) |
 | COCO      | [instructions](https://cloud.google.com/tpu/docs/tutorials/retinanet#prepare_the_coco_dataset) |
 
-### Special Note for TPU
+### Special Note for Handling Data using TPU
 
+TPU might not be able to [use your local file system](https://cloud.google.com/tpu/docs/troubleshooting#cannot_use_local_filesystem). Therefore, you might need to keep all your `TFRecords` data on google cloud storage. In our case, we have organized the data as follows:
+
+```
+$ROOT_BUCKET
+    +\mscoco
+        +\coco2017
+            + \annotations
+            + \test-dev
+            + \test
+            + \train
+            + \unlabeled
+            + \val
+```
 
 ## Model Training
 
