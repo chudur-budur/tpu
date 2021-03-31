@@ -91,7 +91,7 @@ The config `.yaml` file for this experiment can be found [here](https://github.c
 
 ## Model Evaluation
 
-We have done evaluation on the 16700-th checkpoint. Which can be found [here](gs://$GS_ROOT_BUCKET/$USER/trained-models/spinenet49_mrcnn_bs64/).
+We have done evaluation on the 16700-th checkpoint. Which can be found at `gs://$GS_ROOT_BUCKET/$USER/trained-models/spinenet49_mrcnn_bs64/`.
 
 ## Model Training (Misc.)
 
