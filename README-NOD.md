@@ -4,11 +4,13 @@
 
 To get started, make sure you install Tensorflow 1.15+.
 
-* Most of the models need TPU for faster training and reproducing the results from the papers, so we recommend using TPU. But in any case, For GPU training, make sure it has the GPU support. See the [guideline](https://www.tensorflow.org/install/gpu) by Tensorflow.
+* **Most of the models for instance segmentation and detection require TPU for faster training and reproducing the results from the papers. Therefore, we recommend using TPU.** But in any case, for GPU training, make sure it has the GPU support. See the [guideline](https://www.tensorflow.org/install/gpu) by Tensorflow.
 
 ```bash
 pip3 install tensorflow-gpu==1.15  # GPU
 ```
+
+**Please note: we didn't run any models from this code-base on GPU.
 
 * For Cloud TPU / TPU Pods training, make sure Tensorflow 1.15+ is pre-installed in your Google Cloud VM.
 
