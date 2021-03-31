@@ -180,5 +180,13 @@ def main(argv):
 
 
 if __name__ == '__main__':
+  # The following line was added because of this error:
+  #    File "$HOME/.local/share/virtualenvs/tpu-OzRjbUYq/lib/python3.7/
+  #    site-packages/tensorflow/python/summary/writer/writer.py", line 360, in __init__
+  #     "v1.summary.FileWriter is not compatible with eager execution. " 
+  #     RuntimeError: v1.summary.FileWriter is not compatible with eager execution. 
+  #     Use `tf.summary.create_file_writer`,or a `with v1.Graph().as_default():` context 
+  tf.disable_eager_execution() 
+  # 
   logging.set_verbosity(logging.INFO)
   tf.app.run(main)
