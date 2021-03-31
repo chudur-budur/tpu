@@ -64,7 +64,7 @@ $GS_ROOT_BUCKET
 
 We have trained Masked-R-CNN with Spinenet-49 backbone (`v3-8` can't train Spinenet-190). Had to keep the `train_batch_size: 64` (256 was not possible, because of resource exhaustion). Each step will take 2 sec. to compute, therefore completing 162050 steps will take 90 hours to finish. We have run the training for 16700 steps (i.e. 1/10-th of the total steps) and found 18% AP. The train command looks like this ([`train.sh`](https://github.com/chudur-budur/tpu/blob/master/sh/train.sh)):
 
-```
+```bash
 TPU_NAME="$TPU_NAME"
 DATA_ROOT="$GS_ROOT_BUCKET/mscoco/coco2017"
 PROJECT_ROOT="$HOME/tpu/models"
@@ -93,7 +93,7 @@ The config `.yaml` file for this experiment can be found [here](https://github.c
 
 We have done evaluation on the 16700-th checkpoint. Which can be found at `gs://$GS_ROOT_BUCKET/$USER/trained-models/spinenet49_mrcnn_bs64/`. The command looks like this:
 
-```
+```bash
 TPU_NAME="$TPU_NAME"
 DATA_ROOT="$GS_ROOT_BUCKET/mscoco/coco2017"
 PROJECT_ROOT="$HOME/tpu/models"
