@@ -1,5 +1,10 @@
 # Getting started
 
+## Hardware Specs
+
+* We have used GCP VM instance from the image `jenkins-image-7`
+* For TPU, we have used [v3-8](https://cloud.google.com/tpu/docs/types-zones#types). 
+
 ## Installation
 
 To get started, make sure you install Tensorflow 1.15+.
@@ -41,7 +46,7 @@ Tools and scripts are provided to download and convert datasets.
 
 ### Special Note for Handling Data using TPU
 
-TPU might not be able to [use your local file system](https://cloud.google.com/tpu/docs/troubleshooting#cannot_use_local_filesystem). Therefore, you might need to keep all your `TFRecords` data on google cloud storage. In our case, we have organized the data as follows:
+TPU might not be able to [use your local file system](https://cloud.google.com/tpu/docs/troubleshooting#cannot_use_local_filesystem). Therefore, all the `TFRecords` data need to be kept on google cloud storage. In our case, we have organized the data as follows:
 
 ```
 $ROOT_BUCKET
@@ -56,6 +61,10 @@ $ROOT_BUCKET
 ```
 
 ## Model Training
+
+We have trained Mask-RCNN with Spinenet-49 backbone (v3-8 can't train Spinenet-190). Had to keep the `train_batch_size: 64` (256 was not possible). Each step will take 2 sec. to compute, therefore completing 162050 steps will take 90 hours to finish. We have run the training for 16700 steps and found 18% AP. 
+
+## Model Training (Misc.)
 
 We support both GPU training on a single machine, and Cloud TPU / TPU Pods training.
 Below we provide sample commands to launch RetinaNet training on different platforms.
