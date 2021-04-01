@@ -49,7 +49,7 @@ Tools and scripts are provided to download and convert datasets.
 TPU might not be able to [use your local file system](https://cloud.google.com/tpu/docs/troubleshooting#cannot_use_local_filesystem). Therefore, all the `TFRecords` data need to be kept on google cloud storage. In our case, we have organized the data as follows:
 
 ```
-$GS_ROOT_BUCKET
+$gs://GS_ROOT
     +\mscoco
         +\coco2017
             + \annotations
@@ -66,9 +66,9 @@ We have trained Masked-R-CNN with Spinenet-49 backbone (`v3-8` can't train Spine
 
 ```bash
 TPU_NAME="$TPU_NAME"
-DATA_ROOT="$GS_ROOT_BUCKET/mscoco/coco2017"
+DATA_ROOT="gs://$GS_ROOT/mscoco/coco2017"
 PROJECT_ROOT="$HOME/tpu/models"
-MODEL_ROOT="$GS_ROOT_BUCKET/$USER/trained-models/spinenet49_mrcnn_bs64"
+MODEL_ROOT="gs://$GS_ROOT/$USER/trained-models/spinenet49_mrcnn_bs64"
 TRAIN_FILE_PATTERN="$DATA_ROOT/train/train-*"
 EVAL_FILE_PATTERN="$DATA_ROOT/val/val-*"
 VAL_JSON_FILE="$DATA_ROOT/annotations/instances_val2017.json"
@@ -91,13 +91,13 @@ The config `.yaml` file for this experiment can be found [here](https://github.c
 
 ## Model Evaluation
 
-We have done evaluation on the 16700-th checkpoint. Which can be found at `gs://$GS_ROOT_BUCKET/$USER/trained-models/spinenet49_mrcnn_bs64/`. The command looks like this:
+We have done evaluation on the 16700-th checkpoint. Which can be found at `gs://$GS_ROOT/$USER/trained-models/spinenet49_mrcnn_bs64/`. The command looks like this:
 
 ```bash
 TPU_NAME="$TPU_NAME"
-DATA_ROOT="$GS_ROOT_BUCKET/mscoco/coco2017"
+DATA_ROOT="gs://$GS_ROOT/mscoco/coco2017"
 PROJECT_ROOT="$HOME/tpu/models"
-MODEL_ROOT="$GS_ROOT_BUCKET/$USER/trained-models/spinenet49_mrcnn_bs64"
+MODEL_ROOT="gs://$GS_ROOT/$USER/trained-models/spinenet49_mrcnn_bs64"
 TRAIN_FILE_PATTERN="$DATA_ROOT/train/train-*"
 EVAL_FILE_PATTERN="$DATA_ROOT/val/val-*"
 VAL_JSON_FILE="$DATA_ROOT/annotations/instances_val2017.json"
