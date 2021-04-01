@@ -120,7 +120,9 @@ Since we have stopped training at 16700 steps (took 7.5 hrs to finish), the abov
 I0331 12:58:54.080487 140355357364608 tpu_executor.py:237] Eval result: {'AP': 0.18245085, 'AP50': 0.31578702, 'AP75': 0.19115251, 'APs': 0.063275196, 'APm': 0.18639816, 'APl': 0.28921905, 'ARmax1': 0.20520599, 'ARmax10': 0.31232253, 'ARmax100': 0.3235765, 'ARs': 0.12550662, 'ARm': 0.34083357, 'ARl': 0.47202468, 'mask_AP': 0.17229174, 'mask_AP50': 0.29583853, 'mask_AP75': 0.17775297, 'mask_APs': 0.05163716, 'mask_APm': 0.17771785, 'mask_APl': 0.28032523, 'mask_ARmax1': 0.19753762, 'mask_ARmax10': 0.29378796, 'mask_ARmax100': 0.3030697, 'mask_ARs': 0.103267014, 'mask_ARm': 0.32132158, 'mask_ARl': 0.45659247}
 ```
 
-i.e. `AP 18.2%`, `AP50: 31.6%`, `AP75: 19.1%`, `APs: 6.3%`, `APm: 18.6%`. If you can run the experiment till end, you might get the result reported in the paper. 
+i.e. `AP 18.2%`, `AP50: 31.6%`, `AP75: 19.1%`, `APs: 6.3%`, `APm: 18.6%`. If you can run the experiment till end (which will take 90 hrs on `v3-8`), you might get the similar result reported in [the paper](https://arxiv.org/abs/1912.05027).
+
+If you want to run [other (small) models](https://github.com/tensorflow/tpu/blob/master/models/official/detection/MODEL_ZOO.md#instance-segmentation-baselines), just follow the similar process. 
 
 ## Model Training (Misc.)
 
