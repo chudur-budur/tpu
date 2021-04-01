@@ -1,16 +1,16 @@
 #/bin/bash
-# A script to evaluate Masked-R-CNN with Spinenet-49 backbone on nod GCP TPU.
+# A script to evaluate Masked-R-CNN with Spinenet-49 backbone on GCP TPU v3-8.
 # It will pick the latest checkpoint from the $MODEL_ROOT folder.
 # $./eval.sh
 
-TPU_NAME="nod-v38-00"
-DATA_ROOT="gs://noddata/mscoco/coco2017"
+TPU_NAME="$TPU_NAME"
+DATA_ROOT="$GS_ROOT_BUCKET/mscoco/coco2017"
 PROJECT_ROOT="$HOME/tpu/models"
-MODEL_ROOT="gs://noddata/$USER/trained-models/spinenet49_mrcnn_bs64"
+MODEL_ROOT="$GS_ROOT_BUCKET/$USER/trained-models/spinenet49_mrcnn_bs64"
 TRAIN_FILE_PATTERN="$DATA_ROOT/train/train-*"
 EVAL_FILE_PATTERN="$DATA_ROOT/val/val-*"
 VAL_JSON_FILE="$DATA_ROOT/annotations/instances_val2017.json"
-# MODEL_CHECKPOINT="$MODEL_ROOT/model.ckpt-8900"
+# MODEL_CHECKPOINT="$MODEL_ROOT/model.ckpt-16700"
 PYTHONPATH="$PYTHONPATH:$PROJECT_ROOT:$PROJECT_ROOT/official/efficientnet" \
     python $PROJECT_ROOT/official/detection/main.py \
         --use_tpu=True \
