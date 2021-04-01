@@ -50,14 +50,14 @@ TPU might not be able to [use your local file system](https://cloud.google.com/t
 
 ```
 $gs://GS_ROOT
-    +\mscoco
-        +\coco2017
-            + \annotations
-            + \test-dev
-            + \test
-            + \train
-            + \unlabeled
-            + \val
+    + /mscoco
+        + /coco2017
+            + /annotations
+            + /test-dev
+            + /test
+            + /train
+            + /unlabeled
+            + /val
 ```
 
 ## Model Training
