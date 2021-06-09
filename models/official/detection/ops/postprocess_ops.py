@@ -374,11 +374,13 @@ class MultilevelDetectionGenerator(object):
     self._min_level = min_level
     self._max_level = max_level
     self._apply_nms = params.apply_nms
+    self._apply_sigmoid = params.apply_sigmoid
     self._generate_detections = generate_detections_factory(params)
 
   def __call__(self, box_outputs, class_outputs, anchor_boxes, image_shape):
     # Collects outputs from all levels into a list.
     boxes = []
+    encoded_boxes = []
     scores = []
     for i in range(self._min_level, self._max_level + 1):
       _, feature_h, feature_w, num_predicted_corners = (
@@ -388,9 +390,12 @@ class MultilevelDetectionGenerator(object):
                      num_anchors_per_locations)
       num_anchors = feature_h * feature_w  * num_anchors_per_locations
 
-      # Applies score transformation and remove the implicit background class.
-      scores_i = tf.sigmoid(
-          tf.reshape(class_outputs[i], [-1, num_anchors, num_classes]))
+      scores_i = tf.reshape(class_outputs[i], [-1, num_anchors, num_classes])
+      if self._apply_sigmoid:
+        # Applies score transformation.
+        scores_i = tf.sigmoid(scores_i)
+
+      # Remove the implicit background class.
       scores_i = tf.slice(scores_i, [0, 0, 1], [-1, -1, -1])
 
       # Box decoding.
@@ -398,6 +403,7 @@ class MultilevelDetectionGenerator(object):
       # One stage detector only supports class agnostic box regression.
       anchor_boxes_i = tf.reshape(anchor_boxes[i], [-1, num_anchors, 4])
       box_outputs_i = tf.reshape(box_outputs[i], [-1, num_anchors, 4])
+      encoded_boxes.append(box_outputs_i)
       boxes_i = box_utils.decode_boxes(box_outputs_i, anchor_boxes_i)
 
       # Box clipping.
@@ -407,11 +413,13 @@ class MultilevelDetectionGenerator(object):
       scores.append(scores_i)
     boxes = tf.concat(boxes, axis=1)
     boxes = tf.expand_dims(boxes, axis=2)
+    encoded_boxes = tf.concat(encoded_boxes, axis=1)
     scores = tf.concat(scores, axis=1)
 
     if not self._apply_nms:
       return {
           'raw_boxes': boxes,
+          'raw_encoded_boxes': encoded_boxes,
           'raw_scores': scores,
       }
 
@@ -436,7 +444,8 @@ class GenericDetectionGenerator(object):
     self._apply_nms = params.apply_nms
     self._generate_detections = generate_detections_factory(params)
 
-  def __call__(self, box_outputs, class_outputs, anchor_boxes, image_shape):
+  def __call__(self, box_outputs, class_outputs, anchor_boxes, image_shape,
+               regression_weights=None, bbox_per_class=True):
     """Generate final detections.
 
     Args:
@@ -449,6 +458,8 @@ class GenericDetectionGenerator(object):
       image_shape: a tensor of shape of [batch_size, 2] storing the image height
         and width w.r.t. the scaled image, i.e. the same image space as
         `box_outputs` and `anchor_boxes`.
+      regression_weights: A list of four float numbers to scale coordinates.
+      bbox_per_class: A `bool`. If True, perform per-class box regression.
 
     Returns:
       nmsed_boxes: `float` Tensor of shape [batch_size, max_total_size, 4]
@@ -467,26 +478,32 @@ class GenericDetectionGenerator(object):
     class_outputs_shape = tf.shape(class_outputs)
     num_locations = class_outputs_shape[1]
     num_classes = class_outputs_shape[-1]
-    num_detections = num_locations * (num_classes - 1)
 
     class_outputs = tf.slice(class_outputs, [0, 0, 1], [-1, -1, -1])
-    box_outputs = tf.reshape(box_outputs, [-1, num_locations, num_classes, 4])
-    box_outputs = tf.slice(
-        box_outputs, [0, 0, 1, 0], [-1, -1, -1, -1])
-    anchor_boxes = tf.tile(
-        tf.expand_dims(anchor_boxes, axis=2), [1, 1, num_classes - 1, 1])
-    box_outputs = tf.reshape(box_outputs, [-1, num_detections, 4])
-    anchor_boxes = tf.reshape(anchor_boxes, [-1, num_detections, 4])
+    if bbox_per_class:
+      num_detections = num_locations * (num_classes - 1)
+      box_outputs = tf.reshape(box_outputs, [-1, num_locations, num_classes, 4])
+      box_outputs = tf.slice(
+          box_outputs, [0, 0, 1, 0], [-1, -1, -1, -1])
+      anchor_boxes = tf.tile(
+          tf.expand_dims(anchor_boxes, axis=2), [1, 1, num_classes - 1, 1])
+      box_outputs = tf.reshape(box_outputs, [-1, num_detections, 4])
+      anchor_boxes = tf.reshape(anchor_boxes, [-1, num_detections, 4])
 
     # Box decoding.
+    if regression_weights is None:
+      regression_weights = [10.0, 10.0, 5.0, 5.0]
     decoded_boxes = box_utils.decode_boxes(
-        box_outputs, anchor_boxes, weights=[10.0, 10.0, 5.0, 5.0])
+        box_outputs, anchor_boxes, weights=regression_weights)
 
     # Box clipping
     decoded_boxes = box_utils.clip_boxes(decoded_boxes, image_shape)
 
-    decoded_boxes = tf.reshape(decoded_boxes,
-                               [-1, num_locations, num_classes - 1, 4])
+    if bbox_per_class:
+      decoded_boxes = tf.reshape(decoded_boxes,
+                                 [-1, num_locations, num_classes - 1, 4])
+    else:
+      decoded_boxes = tf.expand_dims(decoded_boxes, axis=2)
 
     if not self._apply_nms:
       return {

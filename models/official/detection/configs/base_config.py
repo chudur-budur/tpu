@@ -25,6 +25,12 @@ BASE_CFG = {
         'max_level': 7,
         'use_bfloat16': True,
         'space_to_depth_block_size': 1,
+        # A parser method for parsing additional data to pass to the main
+        # parser method. For example for Copy-Paste augmentation this method
+        # should be set to 'extract_objects_parser' to parse pasting objects
+        # which will be passed to the main parser of
+        # 'maskrcnn_parser_with_copy_paste'.
+        'pre_parser': None,
     },
     'train': {
         'iterations_per_loop': 100,
@@ -57,6 +63,10 @@ BASE_CFG = {
         'l2_weight_decay': 0.0001,
         'gradient_clip_norm': 0.0,
         'space_to_depth_block_size': 1,
+        'pre_parser_dataset': {
+            'file_pattern': '',
+            'dataset_type': 'tfrecord',
+        },
     },
     'eval': {
         'eval_batch_size': 8,
