@@ -24,8 +24,8 @@ export PYTHONPATH="$PYTHONPATH:/path/to/models"
 
 ## Where To Start Exactly?
 
-[Click here (for detection and segmentation models).](https://github.com/chudur-budur/tpu/blob/master/models/official/detection/README.md)
+[Click here (for the official detection and segmentation models).](https://github.com/chudur-budur/tpu/blob/master/models/official/detection/README.md)
 
-Then,
+Then here --
 ### [Running/Training Models for Instance Segmentation and Detection](https://github.com/chudur-budur/tpu/blob/master/README-S49.md)
 
