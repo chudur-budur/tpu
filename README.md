@@ -21,5 +21,10 @@ To run models in the `models` subdirectory, you may need to add the top-level
 export PYTHONPATH="$PYTHONPATH:/path/to/models"
 ```
 
+
+## Where To Start Exactly?
+
+[Click Here (for detection and segmentation models).](https://github.com/chudur-budur/tpu/blob/master/models/official/detection/README.md)
+
 ## [Running/Training Models for Instance Segmentation and Detection](https://github.com/chudur-budur/tpu/blob/master/README-S49.md)
 
