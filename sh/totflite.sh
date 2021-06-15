@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MODEL_NAME="spine49retina"
+MODEL_NAME="spine143retina"
 EXPORT_DIR="../checkpoints/${MODEL_NAME?}-pb"
 CHECKPOINT_PATH="../checkpoints/${MODEL_NAME?}/model.ckpt"
 CONFIG_FILE="../checkpoints/${MODEL_NAME?}/config.yaml"
