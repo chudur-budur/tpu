@@ -1,8 +1,8 @@
 #!/bin/bash
 
-EXPORT_DIR="../checkpoints/spine49retina-pb"
-CHECKPOINT_PATH="../checkpoints/spine49retina/model.ckpt"
-CONFIG_FILE="../checkpoints/spine49retina/spinenet49_retinanet.yaml"
+EXPORT_DIR="../checkpoints/spine96retina-pb"
+CHECKPOINT_PATH="../checkpoints/spine96retina/model.ckpt"
+CONFIG_FILE="../checkpoints/spine96retina/spinenet96_retinanet.yaml"
 PARAMS_OVERRIDE=""  # if any.
 BATCH_SIZE=1
 INPUT_TYPE="image_bytes"
