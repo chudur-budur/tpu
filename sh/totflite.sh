@@ -1,14 +1,15 @@
 #!/bin/bash
 
-EXPORT_DIR="../checkpoints/spine96retina-pb"
-CHECKPOINT_PATH="../checkpoints/spine96retina/model.ckpt"
-CONFIG_FILE="../checkpoints/spine96retina/spinenet96_retinanet.yaml"
+MODEL_NAME="spine96retina"
+EXPORT_DIR="../checkpoints/${MODEL_NAME?}-pb"
+CHECKPOINT_PATH="../checkpoints/${MODEL_NAME?}/model.ckpt"
+CONFIG_FILE="../checkpoints/${MODEL_NAME?}/config.yaml"
 PARAMS_OVERRIDE=""  # if any.
 BATCH_SIZE=1
 INPUT_TYPE="image_bytes"
 INPUT_NAME="input"
 INPUT_IMAGE_SIZE="640,640"
-PYTHONPATH="$PYTHONPATH:$HOME/nodlabs/tpu/models:$HOME/nodlabs/tpu/models/official/efficientnet" python ../models/official/detection/export_saved_model.py \
+PYTHONPATH="$PYTHONPATH:$WORKDIR/tpu/models:$WORKDIR/tpu/models/official/efficientnet" python ../models/official/detection/export_saved_model.py \
   --export_dir="${EXPORT_DIR?}" \
   --checkpoint_path="${CHECKPOINT_PATH?}" \
   --config_file="${CONFIG_FILE}" \
