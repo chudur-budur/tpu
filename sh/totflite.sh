@@ -2,7 +2,7 @@
 
 EXPORT_DIR="../checkpoints/spine49retina-tfl"
 CHECKPOINT_PATH="../checkpoints/spine49retina/model.ckpt"
-CONFIG_FILE="../checkpoints/spine190retina/spinenet49_retinanet.yaml"
+CONFIG_FILE="../checkpoints/spine49retina/spinenet49_retinanet.yaml"
 PARAMS_OVERRIDE=""  # if any.
 BATCH_SIZE=1
 INPUT_TYPE="image_bytes"
