@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Model name/prefix
-MODEL_NAME="spine143retina-sdepth"
+MODEL_NAME="spine143mrcnn"
 
 # convert checkpoint to SavedModel
-EXPORT_DIR="../checkpoints/${MODEL_NAME?}-pb"
+EXPORT_DIR="../checkpoints/${MODEL_NAME?}-mlir"
 CHECKPOINT_PATH="../checkpoints/${MODEL_NAME?}/model.ckpt"
 CONFIG_FILE="../checkpoints/${MODEL_NAME?}/config.yaml"
-PARAMS_OVERRIDE=""  # if any.
+PARAMS_OVERRIDE="" # if any.
 BATCH_SIZE=1
 INPUT_TYPE="image_bytes"
 INPUT_NAME="input"
@@ -24,9 +24,9 @@ PYTHONPATH="$PYTHONPATH:$WORKDIR/tpu/models:$WORKDIR/tpu/models/official/efficie
         --input_image_size="${INPUT_IMAGE_SIZE?}" \
 
 # Save to TF-Lite format
-SAVED_MODEL_DIR="../checkpoints/${MODEL_NAME}-pb"
-OUTPUT_DIR="../checkpoints/${MODEL_NAME}-tfl"
-PYTHONPATH="$PYTHONPATH:$WORKDIR/tpu/models:$WORKDIR/tpu/models/official/efficientnet" \
-    python ../models/official/detection/export_tflite_model.py \
-        --saved_model_dir="${SAVED_MODEL_DIR?}" \
-        --output_dir="${OUTPUT_DIR?}" \
+# SAVED_MODEL_DIR="../checkpoints/${MODEL_NAME}-mlir"
+# OUTPUT_DIR="../checkpoints/${MODEL_NAME}-mlir"
+# PYTHONPATH="$PYTHONPATH:$WORKDIR/tpu/models:$WORKDIR/tpu/models/official/efficientnet" \
+#     python ../models/official/detection/export_tflite_model.py \
+#         --saved_model_dir="${SAVED_MODEL_DIR?}" \
+#         --output_dir="${OUTPUT_DIR?}" \

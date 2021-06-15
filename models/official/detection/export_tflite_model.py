@@ -28,9 +28,10 @@ FLAGS = flags.FLAGS
 
 flags.DEFINE_string('saved_model_dir', None, 'The saved model directory.')
 flags.DEFINE_string('output_dir', None, 'The export tflite model directory.')
+flags.DEFINE_string('model_name', 'model.tflite', 'The name of the output tflite model file.')
 
 
-def export(saved_model_dir, tflite_model_dir):
+def export(saved_model_dir, tflite_model_dir, model_name):
   """Exports tflite model."""
   converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
   converter.target_spec.supported_ops = [
@@ -38,7 +39,7 @@ def export(saved_model_dir, tflite_model_dir):
   ]
 
   tflite_model = converter.convert()
-  tflite_model_path = os.path.join(tflite_model_dir, 'model.tflite')
+  tflite_model_path = os.path.join(tflite_model_dir, model_name)
 
   with tf.gfile.GFile(tflite_model_path, 'wb') as f:
     f.write(tflite_model)
@@ -46,7 +47,7 @@ def export(saved_model_dir, tflite_model_dir):
 
 def main(argv):
   del argv  # Unused.
-  export(FLAGS.saved_model_dir, FLAGS.output_dir)
+  export(FLAGS.saved_model_dir, FLAGS.output_dir, FLAGS.model_name)
 
 
 if __name__ == '__main__':
