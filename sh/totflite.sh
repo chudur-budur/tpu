@@ -24,9 +24,9 @@ PYTHONPATH="$PYTHONPATH:$WORKDIR/tpu/models:$WORKDIR/tpu/models/official/efficie
         --input_image_size="${INPUT_IMAGE_SIZE?}" \
 
 # Save to TF-Lite format
-# SAVED_MODEL_DIR="../checkpoints/${MODEL_NAME}-mlir"
-# OUTPUT_DIR="../checkpoints/${MODEL_NAME}-mlir"
-# PYTHONPATH="$PYTHONPATH:$WORKDIR/tpu/models:$WORKDIR/tpu/models/official/efficientnet" \
-#     python ../models/official/detection/export_tflite_model.py \
-#         --saved_model_dir="${SAVED_MODEL_DIR?}" \
-#         --output_dir="${OUTPUT_DIR?}" \
+SAVED_MODEL_DIR="../checkpoints/${MODEL_NAME}-mlir"
+OUTPUT_DIR="../checkpoints/${MODEL_NAME}-mlir"
+PYTHONPATH="$PYTHONPATH:$WORKDIR/tpu/models:$WORKDIR/tpu/models/official/efficientnet" \
+    python ../models/official/detection/export_tflite_model.py \
+        --saved_model_dir="${SAVED_MODEL_DIR?}" \
+        --output_dir="${OUTPUT_DIR?}" \
