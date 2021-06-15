@@ -1,6 +1,6 @@
 #!/bin/bash
 
-EXPORT_DIR="../checkpoints/spine49retina-tfl"
+EXPORT_DIR="../checkpoints/spine49retina-pb"
 CHECKPOINT_PATH="../checkpoints/spine49retina/model.ckpt"
 CONFIG_FILE="../checkpoints/spine49retina/spinenet49_retinanet.yaml"
 PARAMS_OVERRIDE=""  # if any.
