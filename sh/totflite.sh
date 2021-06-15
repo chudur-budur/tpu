@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Model name/prefix
-MODEL_NAME="spine143mrcnn"
+MODEL_NAME="spine143retina"
 
 # convert checkpoint to SavedModel
 EXPORT_DIR="../checkpoints/${MODEL_NAME?}-mlir"
